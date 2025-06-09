@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Items</title></head>
+<body>
+<h2>Items</h2>
+<ul>
+    <li th:each="item: ${items}">
+        [[${item.name}]] ([[${item.price}]]) ::
+        <a th:href="@{/cart/add/{id}(id=${item.id})}">Add to cart</a>
+    </li>
+</ul>
+</body>
+</html>

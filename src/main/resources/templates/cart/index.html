@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Cart</title></head>
+<body>
+<h2>Your Cart</h2>
+<table border="1">
+    <tr>
+        <th>ID</th><th>Name</th><th>Price</th><th>Quantity</th><th>Total</th><th>Action</th>
+    </tr>
+    <tr th:each="item : ${cart.items}">
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.price}"></td>
+        <td>
+            <form th:action="@{/cart/update/{id}(id=${item.id})}" method="post">
+                <input type="hidden" name="id" th:value="${item.id}"/>
+                <input name="qty" th:value="${item.qty}" onblur="this.form.submit()"/>
+            </form>
+        </td>
+        <td th:text="${item.price * item.qty}"></td>
+        <td>
+            <a th:href="@{/cart/remove/{id}(id=${item.id})}">Remove</a>
+        </td>
+    </tr>
+</table>
+
+<br>
+<a href="/cart/clear">Clear Cart</a> | <a href="/item/index">Add More</a>
+</body>
+</html>
